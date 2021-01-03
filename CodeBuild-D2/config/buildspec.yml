@@ -1,0 +1,15 @@
+version: 0.2
+
+env:
+  variables:
+    ENVIRONMENT_NAME: "$1"
+    VPC_ID: "$2"
+    SUBNET_ID: "$3"
+
+phases:
+  build:
+    commands:
+      - printenv
+      - ls -lrt
+      - echo "This is Simple Buildspec file to execute a shell script and create a CF stack"
+      - bash scripts/ec2_create.sh $ENVIRONMENT_NAME $VPC_ID $SUBNET_ID

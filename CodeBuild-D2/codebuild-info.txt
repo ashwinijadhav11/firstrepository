@@ -1,0 +1,64 @@
+CF template:
+- code in github
+- shell script -> 
+
+python ec2_list.py
+
+CF template:
+	Create stack using template : Console
+	aws cloudformation deploy commands -> create stack => deploy.sh
+
+Git: Remote 
+- 
+Git: Local checkout
+Git:
+	scripts/iam_deploy.sh
+	templates/iam_resources.yml
+	scripts/network_deploy.sh
+	templates/network_resources.yml
+	
+- Git code checkout on some path, a shell/bash any environment to run commands
+- iam policies for local iam user (accessid, accesskey)
+
+Create IAM Role for EC2, Lambda using Bash Script deployment for CF stack.
+
+EC2:
+- AMI (Pre-installed OS libraries) => EC2 instance (running) - amazon linux 2 -> os, volume, network
+-> RAM, CPU, Volume and Network
+
+Base AMI => EC2 instance running => application/code installation => created a custom AMI
+
+Docker:
+- Docker Image (Pre-installed OS libraries (ubuntu, centos, amazon linux)) => Container (running) -> ram, volume, network
+
+EC2 instance AMI => 1000 packages (half a minute , minute)
+
+Docker Image => 100 packages ( seconds)
+
+Codebuild: Running managed containers
+
+CF Stack Creation:
+- Root account console => manually all resources can be created
+				      template => CF stack create , IAM User : root
+					   - create vpc, subnet
+
+- Root account cli (IAM AccessId/Accesskey) => bash script => template => CF stack create
+
+CodeBuild : Service role
+- Build Runtime => bash script => template => CF stack create (EC2 instance)
+
+CF Stack : dev/qa/prod
+
+Network
+	Bash Script : to execute your network CF template : script/vpc_deploy.sh
+	CF template : Network (VPC, Subnet, RT, IGW) : templates/vpc_resources.yml
+	
+Server
+	Bash Script : to execute your EC2 CF template : script/server_deploy.sh
+		To fetch values of VPCId and SubnetId for (dev/qa/prod) environment
+	CF Template : EC2 instance (AS, ELB, IAM Role for EC2) : templates/server_resources.yml
+
+Database:
+	Bash Script : to execute your RDS CF template : script/db_deploy.sh
+		To fetch values of VPCId and SubnetId for (dev/qa/prod) environment
+	CF Template : RDS instance : templates/db_resources.yml
